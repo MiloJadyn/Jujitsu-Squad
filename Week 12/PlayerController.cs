@@ -82,7 +82,7 @@ public class PlayerController : MonoBehaviour
                 // Find the GameManager in the scene
                 GameManager gm = GameObject.Find("GameManager").GetComponent<GameManager>();
 
-                // Add +1 score using the GameManager’s function
+                // Add +1 score using the GameManagerï¿½s function
                 gm.AddScore(1);
 
                 // Print a message for testing
