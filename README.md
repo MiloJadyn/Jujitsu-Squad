@@ -5,11 +5,13 @@ Josiah Song and Jadyn Milo
 
 <h2>Week 11</h2>
 Task 1 completed by Josiah Song
+<br>
 Task 2 completed by Jadyn Milo
 <br>
 
 <h2>Week 12</h2>
 Task 1 completed by Jadyn Milo
+<br>
 Task 2 completed by Josiah Song
 <br>
 
