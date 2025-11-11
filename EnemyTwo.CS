@@ -19,4 +19,4 @@ public class EnemyTwo : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
-}S
+}
