@@ -23,4 +23,20 @@ Task 2 completed by Jadyn Milo
 
 <h2>Week 14</h2>
 TBA
+
+<style>
+
+h1{
+    font:Impact;
+    font-size: 20px;
+}
+
+
+h2{
+    font:Impact;
+    font-size: 16px;
+}
+
+
+</style>
 <br>
