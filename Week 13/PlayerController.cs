@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -8,6 +7,7 @@ public class PlayerController : MonoBehaviour
     public int lives;
     private float speed;
     private int weaponType;
+    private bool hasShield;
 
     private GameManager gameManager;
 
@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         lives = 3;
         speed = 5.0f;
+        weaponType = 1;
         gameManager.ChangeLivesText(lives);
     }
 
@@ -41,6 +42,14 @@ public class PlayerController : MonoBehaviour
         //If not: lose a life
         //lives = lives - 1;
         //lives -= 1;
+        if (hasShield)
+        {
+            shieldPrefab.SetActive(false);
+            hasShield = false;
+            gameManager.ManagePowerupText(0);
+            gameManager.PlaySound(2);
+            return;
+        }
         lives--;
         gameManager.ChangeLivesText(lives);
         if (lives == 0)
@@ -50,6 +59,7 @@ public class PlayerController : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
     IEnumerator SpeedPowerDown()
     {
         yield return new WaitForSeconds(3f);
@@ -95,9 +105,15 @@ public class PlayerController : MonoBehaviour
                     break;
                 case 4:
                     //Picked up shield
-                    //Do I already have a shield?
-                    //If yes: do nothing
-                    //If not: activate the shield's visibility
+                    if (hasShield)
+                    {
+                        //Do nothing
+                        break;
+                    }
+
+                    //activate shield
+                    shieldPrefab.SetActive(true);
+                    hasShield = true;
                     gameManager.ManagePowerupText(4);
                     break;
             }
@@ -126,7 +142,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-     void Movement()
+    void Movement()
     {
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
@@ -145,25 +161,5 @@ public class PlayerController : MonoBehaviour
             transform.position = new Vector3(transform.position.x, transform.position.y * -1, 0);
         }
 
-    }
-        private void OnTriggerEnter2D(Collider2D other)
-    {
-        { 
-            // Check if the thing we touched is tagged "Coin"
-            if (other.CompareTag("Coin"))
-            {
-                // Find the GameManager in the scene
-                GameManager gm = GameObject.Find("GameManager").GetComponent<GameManager>();
-
-                // Add +1 score using the GameManager�s function
-                gm.AddScore(1);
-
-                // Print a message for testing
-                Debug.Log("Collected a coin! +1 score");
-
-                // Destroy the coin
-                Destroy(other.gameObject);
-            }
-        }
     }
 }
